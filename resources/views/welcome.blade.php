@@ -3,8 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>MPESA Integration</title>
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
+
 
 </head>
 <body>
@@ -22,7 +24,8 @@
             <div class="card">
                 <div class="card-header">Register URLs</div>
                 <div class="card-body">
-                    <button class="btn btn-primary">Register URLs</button>
+                    <button id="registerURLS" class="btn btn-primary">Register URLs</button>
+                    <h4 id="response"></h4>
                 </div>
             </div>
 
@@ -49,20 +52,6 @@
     </div>
 </div>
 <script src="{{ asset('js/app.js') }}"></script>
-<script>
-    document.getElementById('getAccessToken').addEventListener('click', (e) => {
-        e.preventDefault()
-        axios.post('get-token', {})
-            .then((response) => {
-                console.log(response.data)
-                document.getElementById('access_token').innerHTML = response.data.access_token
-            })
-            .catch((error) => {
-                console.log(error)
-            })
 
-    })
-
-</script>
 </body>
 </html>

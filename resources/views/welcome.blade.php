@@ -40,10 +40,10 @@
                             <input type="number" name="amount" class="form-control" id="amount">
                         </div>
                         <div class="form-group">
-                            <label for="amount">Account</label>
+                            <label for="account">Account</label>
                             <input type="text" name="account" class="form-control" id="account">
                         </div>
-                        <button class="btn btn-primary">Simulate</button>
+                        <button id="simulatec2b" class="btn btn-primary">Simulate</button>
                     </form>
                 </div>
             </div>

@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 Route::post('/get-token',[MpesaController::class,'getAccessToken']);
 Route::post('/register-urls',[MpesaController::class,'registerURLS']);
+
+Route::post('/simulate-c2b',[MpesaController::class,'simulateTransaction']);

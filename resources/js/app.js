@@ -22,9 +22,23 @@ document.getElementById('registerURLS').addEventListener('click', (e) => {
             document.getElementById('response').innerHTML = response.data.errorMessage
         }
         console.log(response.data);
-            console.log(response.data)
+
         })
         .catch((error) => {
+            console.log(error)
+        })
+})
+document.getElementById(`simulatec2b`).addEventListener('click',(e)=>{
+    e.preventDefault()
+    const requestBody ={
+        amount: document.getElementById('amount').value,
+        account: document.getElementById('account').value
+    }
+    axios.post('/simulate-c2b',requestBody)
+        .then((response)=>{
+            console.log(response.data)
+        })
+        .catch((error)=>{
             console.log(error)
         })
 

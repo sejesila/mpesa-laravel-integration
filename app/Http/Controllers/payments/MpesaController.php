@@ -54,78 +54,24 @@ class MpesaController extends Controller
                 CURLOPT_HTTPHEADER => array('Authorization: Bearer ' .$this->getAccessToken(),'Content-Type: application/json'),
                 CURLOPT_RETURNTRANSFER => 1, //true
                 CURLOPT_POSTFIELDS => json_encode($body)
-
             )
         );
         $curl_response = (curl_exec($ch));
         curl_close($ch);
         return $curl_response;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /*
-         *   curl_setopt($ch, CURLOPT_HTTPHEADER, [
-
-            'Authorization: Bearer 6Js7y1EvWPcpkWktKMJOUUV7bpYU',
-
-            'Content-Type: application/json'
-
-        ]);
-
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        $response = curl_exec($ch);
-
-        curl_close($ch);
-
-        echo $response;
     }
+    public function simulateTransaction(Request $request)
+    {
+        $body = array(
+            'ShortCode'=> env('MPESA_SHORTCODE'),
+            'Msisdn' => env('MPESA_TEST_MSISDN'),
+            'Amount'=>$request->amount,
+            'BillRefNumber'=>$request->account,
+            'CommandID'=>'CustomerPayBillOnline'
+        );
+        $url = 'c2b/v1/simulate';
 
-        curl_setopt($ch, CURLOPT_POSTFIELDS, {
-
-    "BusinessShortCode": 174379,
-
-    "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhND4ZTZiNzJhZGExZWQyYzkxOTIwMjEwNzI3MTcxODQ4",
-
-    "Timestamp": "20210727171848",
-
-    "TransactionType": "CustomerPayBillOnline",
-
-    "Amount": 1,
-
-    "PartyA": 2547087******,
-
-    "PartyB": 174379,
-
-    "PhoneNumber": 2547087*****,
-
-    "CallBackURL": "https://mydomain.com/path",
-
-    "AccountReference": "CompanyXLTD",
-
-    "TransactionDesc": "Payment of X"
-
-  }); */
+        return $this->makeHttp($url,$body);
 
     }
 

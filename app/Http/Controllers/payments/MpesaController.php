@@ -74,5 +74,28 @@ class MpesaController extends Controller
         return $this->makeHttp($url,$body);
 
     }
+    public function stkPush(Request $request){
+        $timestamp = date('YmdHms');
+        $password =env('MPESA_STK_SHORTCODE'). env('MPESA_PASSKEY').$timestamp;
+
+        $curl_post_data = array(
+
+            "BusinessShortCode" => env('MPESA_STK_SHORTCODE'),
+            "Password" =>$password,
+            "Timestamp" => $timestamp,
+            "TransactionType" => "CustomerPayBillOnline",
+            "Amount"=>$request->amount,
+            "PartyA"=>$request->phone,
+            "PartyB"=>env('MPESA_STK_SHORTCODE'),
+            "PhoneNumber=>$request->phone",
+            "CallBackURL"=>env('mpesa_test_url').'/stkpush',
+            "AccountReference"=>$request->account,
+            "TransactionDesc"=>$request->account
+
+        );
+        $url ='stkpush/v1/processrequest';
+        return $this->makeHttp($url,$curl_post_data);
+
+    }
 
 }

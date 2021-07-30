@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\payments\MpesaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\payments\MpesaResponsesController;
@@ -21,3 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('validation',[MpesaResponsesController::class,'validation']);
 Route::post('confirmation',[MpesaResponsesController::class,'confirmation']);
+
+Route::post('/stkpush',[MpesaController::class,'stkPush']);
